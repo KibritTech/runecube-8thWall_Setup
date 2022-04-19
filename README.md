@@ -6,11 +6,11 @@ First go to 8thwall.com and make yourself an account. Done? Lets create a new pr
 This repo includes the files necessary for 8th Wall engine. 
 
 ## 8thWall project consists of 3 directories
---> APP
+      --> APP
 
---> FILES
+      --> FILES
 
---> ASSETS
+      --> ASSETS
 
 You will need to transfer(copy+paste) head.html, app.js and body.html from this repo to the APP directory on your 8thWall project
 
@@ -63,20 +63,20 @@ socket.on("connect", () => {
   console.log("Connection Establised");
 });
 ```            
-3.	When the game is started, we need to emit ```game_started``` event, to make the socket know about game status (started).
+2.	When the game is started, we need to emit ```game_started``` event, to make the socket know about game status (started).
 ``` javascript
 socket.emit("game_started", () => {
   console.log("Game started", socket.id);
 });
 ```
-5.	Every time when we click on rune, we need to emit ```check_rune``` event and send clicked rune data (rune value and color) to that event.
+3.	Every time when we click on rune, we need to emit ```check_rune``` event and send clicked rune data (rune value and color) to that event.
 ``` javascript
 socket.emit("check_rune", {
    value: _value,
    color: _color,
 });
 ```
-7.	With each reconnection we emit ```user_reconnected``` event and send user data (sid, username, role) to that event. Username that we send we get from url params.
+4.	With each reconnection we emit ```user_reconnected``` event and send user data (sid, username, role) to that event. Username that we send we get from url params.
 ``` javascript
 socket.emit("user_reconnected", {
   sid: socket.id,
@@ -84,7 +84,7 @@ socket.emit("user_reconnected", {
   role: "explorer",
 });
 ```
-9.	We are listening to ```finish_game``` event and immediately redirecting user to leaderboard at the end of the game.
+5.	We are listening to ```finish_game``` event and immediately redirecting user to leaderboard at the end of the game.
 ``` javascript
 socket.on("finish_game", (res) => {
   window.location = "https://testcubeapp.herokuapp.com/leaderboard";
