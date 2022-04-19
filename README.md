@@ -1,5 +1,5 @@
 # runecube-8thWall_Setup
-8th Wall – platform, that offers a complete set of tools to create interactive web-based augmented reality.
+[8th Wall](https://www.8thwall.com/) – platform, that offers a complete set of tools to create interactive web-based augmented reality.
 
 First go to 8thwall.com and make yourself an account. Done? Lets create a new project and I will guide you what files you need. 
 
@@ -22,7 +22,7 @@ You will need to transfer(copy+paste) click_sound.mp3, theme_song.mp3 from this 
 ## head.html
 1.	```<meta name="8thwall:renderer" content="aframe:1.2.0">```               (required)
 
-      Allows 8th Wall to be easily integrated into 3D JavaScript frameworks such as A-Frame.
+      Allows 8th Wall to be easily integrated into 3D JavaScript frameworks such as [A-Frame](https://aframe.io/).
 
 2.	```<meta name="8thwall:package" content="@8thwall.xrextras"> ```          (required)
 
