@@ -1,53 +1,81 @@
 # runecube-8thWall_Setup
-This repo includes the files necessary for 8th Wall engine. See the Wiki Page for guide.
-
 8th Wall – platform, that offers a complete set of tools to create interactive web-based augmented reality.
 
-head.html
-1.	<meta name="8thwall:renderer" content="aframe:1.2.0">               (required)
-Allows 8th Wall to be easily integrated into 3D JavaScript frameworks such as A-Frame.
+First go to 8thwall.com and make yourself an account. Done? Lets create a new project and I will guide you what files you need. 
 
-2.	<meta name="8thwall:package" content="@8thwall.xrextras">           (required)
-For apps that don’t natively support the features required for WebAR, XRExtras library provides flows to direct users to the right place, maximizing accessibility of WebAR projects from these apps.
+This repo includes the files necessary for 8th Wall engine. 
 
-3.	<meta name="8thwall:package" content="@8thwall.landing-page">       (required)
-Allows us to use default landing page.
+## 8thWall project consists of 3 directories
+--> APP
+
+--> FILES
+
+--> ASSETS
+
+You will need to transfer(copy+paste) head.html, app.js and body.html from this repo to the APP directory on your 8thWall project
+
+You will need to transfer(copy+paste) RUNE_DATA.js from this repo to the FILES directory on your 8thWall project
+
+You will need to transfer(copy+paste) click_sound.mp3, theme_song.mp3 from this repo to the ASSETS directory on your 8thWall project
+
+
+## head.html
+1.	```<meta name="8thwall:renderer" content="aframe:1.2.0">```               (required)
+
+      Allows 8th Wall to be easily integrated into 3D JavaScript frameworks such as A-Frame.
+
+2.	```<meta name="8thwall:package" content="@8thwall.xrextras"> ```          (required)
+
+      For apps that don’t natively support the features required for WebAR, XRExtras library provides flows to direct users to the right place, maximizing accessibility of WebAR projects from these apps.
+
+3.	```<meta name="8thwall:package" content="@8thwall.landing-page"> ```      (required)
+
+      Allows us to use default landing page.
 
 Also, in this section we need to connect to socket.io.js.
 
-body.html
-1.	scene__UI
-This class is responsible for the start page with START button.
-2.	<a-scene> 
-The scene is the global root object, and all entities are contained within the scene.
-3.	<a-entity> 
-Entities are placeholder objects to which we plug in components to provide them appearance, behavior, and functionality.
-4.	<a-camera>
-The camera primitive determines what the user sees. Camera has <a-entity> element, which is response for rune objects.
-5.	<a-light>
-A light changes the lighting and shading of the scene.
+## body.html
+1.	```scene__UI```
 
-app.js
+      This class is responsible for the start page with START button.
+
+2.	```<a-scene> ```
+
+      The scene is the global root object, and all entities are contained within the scene.
+
+3.	```<a-entity> ```
+
+      Entities are placeholder objects to which we plug in components to provide them appearance, behavior, and functionality.
+
+4.	```<a-camera>```
+
+      The camera primitive determines what the user sees. Camera has  ```<a-entity>``` element, which is response for rune objects.
+  
+5.	```<a-light>```
+  
+      A light changes the lighting and shading of the scene.
+
+## app.js
 Socket Events
-1.	We are listening to connect event and for each connection we save connection ID (socket.id).
-2.	When the game is started, we need to emit game_started event, to make the socket know about game status (started).
-3.	Every time when we click on rune, we need to emit check_rune event and send clicked rune data to that event.
-4.	With each reconnection we emit user_reconnected event and send user data to that event. (username that we send we get from url params)
-5.	We are listening to finish_game event and immediately redirecting user to leaderboard at the end of the game.
+1.	We are listening to ```connect``` event and for each connection we save connection ID (socket.id).
+2.	When the game is started, we need to emit ```game_started``` event, to make the socket know about game status (started).
+3.	Every time when we click on rune, we need to emit ```check_rune``` event and send clicked rune data to that event.
+4.	With each reconnection we emit ```user_reconnected``` event and send user data to that event. (username that we send we get from url params)
+5.	We are listening to ```finish_game``` event and immediately redirecting user to leaderboard at the end of the game.
 
 Functions
 1.	generateRandomNumber()
-This function accepts two arguments (start and end). If we get both of arguments, then the range will be set from start to end, else if we don’t have end argument, then range will be set from negative start to positive start.
+  
+    This function accepts two arguments (start and end). If we get both of arguments, then the range will be set from start to end, else if we don’t have end argument, then range will be set from negative start to positive start.
 
 2.	generateRandomPosition()
-This function return an object of x,y,z elements, which values is generated by generateRandomNumber() function
+  
+    This function return an object of x,y,z elements, which values is generated by generateRandomNumber() function
 
 3.	generateRune()
-This function accepts four arguments (scene, color, value, entity), where scene is a <a-scene> element and color/value/entity are from RUNE_DATA.js. Function uses these arguments to create a rune object.
-We always have at least 4 runes on stage. After user has clicked on rune object, we call generateRune() function and recreate the object. 
+  
+    This function accepts four arguments (scene, color, value, entity), where scene is a <a-scene> element and color/value/entity are from RUNE_DATA.js. Function uses these arguments to create a rune object. We always have at least 4 runes on scene. After user has clicked on rune object, we call generateRune() function and recreate the object. 
 
 
-RUNE_DATA.js
-It is an array of rune objects, that contain rune value, color and entity. Each entity represents A-Frame element, like <a-box>, <a- cylinder>, etc.
-
-
+## RUNE_DATA.js
+It is an array of rune objects, that contain rune value, color and entity. Each entity represents A-Frame element, like ```<a-box>```, ```<a- cylinder>```, etc.
