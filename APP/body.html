@@ -1,0 +1,81 @@
+<style>
+  .scene__UI {
+    z-index: 999;
+    background-color: #edf2f4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .hint {
+    color: #8d99ae;
+    font-size: 1.4rem;
+    font-family: "Arial";
+  }
+
+  #startButton {
+    padding: 30px 60px;
+    border: 1px solid #99d98c;
+    outline: none;
+    background-color: transparent;
+    transition: 0.3s;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  #startButton:hover {
+    color: #fff;
+    background-color: #52b69a;
+  }
+</style>
+
+<div class="scene__UI">
+  <div class="hint">Try keeping your phone upwards...</div>
+  <button id="startButton">Start Exploring</button>
+</div>
+<audio id="clickSound" src="assets/click_sound.mp3"></audio>
+<audio id="themeSound" src="assets/theme_song.mp3" autoplay loop></audio>
+<a-scene
+  style="visibility: hidden"
+  id="scene"
+  landing-page
+  xrextras-loading
+  xrextras-runtime-error
+  renderer="colorManagement:true"
+  xrweb="
+      allowedDevices: any;
+      defaultEnvironmentFogIntensity: 0.5;"
+>
+  <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+  <a-camera id="camera" position="0 8 0">
+    <a-entity
+      cursor="fuse: false; rayOrigin: mouse;"
+      position="0 0 -1"
+      raycaster="objects: .rune"
+    >
+    </a-entity>
+  </a-camera>
+
+  <a-entity
+    light="
+        type: directional;
+        intensity: 0.8;
+        castShadow: true;
+        shadowMapHeight:2048;
+        shadowMapWidth:2048;
+        shadowCameraTop: 40;
+        shadowCameraBottom: -40;
+        shadowCameraRight: 40;
+        shadowCameraLeft: -40;
+        target: #camera"
+    xrextras-attach="target: camera; offset: 8 15 4"
+    position="1 4.3 2.5"
+    shadow
+  >
+  </a-entity>
+
+  <a-light type="ambient" intensity="0.5"></a-light>
+</a-scene>
